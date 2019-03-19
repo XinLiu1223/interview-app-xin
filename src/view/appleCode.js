@@ -62,7 +62,7 @@ class App extends Component {
     const div = this.refs[id] || null;
     let c = div.childNodes;
     console.log('child node: ' + c[1]);
-    const btn = document.createElement('button');
+    const btn = React.createElement('button');
     if(id && id <= 3) {
       btn.appendChild(document.createTextNode('Remove'));
       btn.addEventListener("click", this.removeTitle);
