@@ -1,0 +1,11 @@
+tr.mylistTitleHide > td:nth-child(2n-1) {
+  visibility: hidden;
+}
+
+tr.mylist > td:nth-child(2n) {
+  display: table-caption;
+}
+
+tr.recommendations > td:nth-child(2n) {
+  display: table-caption;
+}
