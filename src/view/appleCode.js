@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import logo from './logo.svg';
-import { connect } from 'react-redux';
-import { appleApiCall } from '../state-management/appleCode/actions';
-import '../App.css';
+// import { connect } from "react-redux";
+// import { appleApiCall } from "../state-management/appleCode/actions";
+import "./appleCode.css";
 
 class App extends Component {
-//   constructor(props) {
-//     super(props);
+  //   constructor(props) {
+  //     super(props);
 
-//     // this.state = {
-//     //   test: 'Hello World',
-//     //   appleInterview: this.props.appleCodeList
-//     // };
-//   }
+  //     // this.state = {
+  //     //   test: 'Hello World',
+  //     //   appleInterview: this.props.appleCodeList
+  //     // };
+  //   }
 
   componentWillMount() {
     this.props.appleApiCall();
@@ -26,64 +26,69 @@ class App extends Component {
     const div = this.refs["Progress2"] || null;
     // debugger;
     for (var i = 0; i < 5; i++) {
-      const btn = document.createElement('button');
-      btn.appendChild(document.createTextNode('Button ' + i));
-      btn.addEventListener('click', (function(i) {
-        return function() { console.log(i); };
-      })(i));
-      if(div && div !== undefined) {
+      const btn = document.createElement("button");
+      btn.appendChild(document.createTextNode("Button " + i));
+      btn.addEventListener(
+        "click",
+        (function(i) {
+          return function() {
+            console.log(i);
+          };
+        })(i)
+      );
+      if (div && div !== undefined) {
         div.appendChild(btn);
       }
     }
-  }
+  };
 
   interviewFunc = () => {
     this.setState({
-      test: 'initTest state changed'
+      test: "initTest state changed"
     });
     this.testInterviewQues();
-  }
+  };
 
   btnShow = {};
 
   removeTitle = () => {
     const row = this.refs["mylist"] || null;
-    console.log('list row: ' + row);
-    row.className = 'mylistTitleHide';
-  }
+    console.log("list row: " + row);
+    row.className = "mylistTitleHide";
+  };
 
   addTitle = () => {
     const row = this.refs["mylist"] || null;
-    console.log('list row: ' + row);
-    row.className = 'mylist';
-  }
+    console.log("list row: " + row);
+    row.className = "mylist";
+  };
 
-  logMouseEnter = (id) => {
+  logMouseEnter = id => {
     const div = this.refs[id] || null;
     let c = div.childNodes;
-    console.log('child node: ' + c[1]);
-    const btn = React.createElement('button');
-    if(id && id <= 3) {
-      btn.appendChild(document.createTextNode('Remove'));
+    console.log("child node: " + c[1]);
+    const btn = document.createElement("button");
+    if (id && id <= 3) {
+      btn.appendChild(document.createTextNode("Remove"));
       btn.addEventListener("click", this.removeTitle);
     }
-    if(id && id > 3) {
-      btn.appendChild(document.createTextNode('Add'));
+    if (id && id > 3) {
+      btn.appendChild(document.createTextNode("Add"));
       btn.addEventListener("click", this.addTitle);
     }
-    if(div && div !== undefined && c[1] === undefined) {
+    if (div && div !== undefined && c[1] === undefined) {
       div.appendChild(btn);
     }
     // console.log(id);
     this.btnShow.id = id;
-    console.log('enter id: ' + this.btnShow.id)
-  }
+    console.log("enter id: " + this.btnShow.id);
+  };
 
-  logMouseLeave = (id) => {
+  logMouseLeave = id => {
     // console.log(id);
     this.btnShow.id = id;
-    console.log('leave id: ' + this.btnShow.id)
-  }
+    console.log("leave id: " + this.btnShow.id);
+  };
 
   generateRow = (arr, key) => {
     return (
@@ -105,11 +110,15 @@ class App extends Component {
         })}
       </tr>
     );
-  }
+  };
 
   render() {
-    console.log(this.props.appleCodeList);
-    const { appleList } = this.props.appleCodeList;
+    console.log(this.props.listObj);
+    // const { appleListObj } = this.props.listObj;
+    // must use destructure to fetch and assign variable appleListObj
+    // bucause the mapStateToProps just to fetch state appleCode from
+    // the combineReducer result
+    const appleObj = this.props.listObj;
 
     return (
       <div className="App">
@@ -133,8 +142,11 @@ class App extends Component {
         {/* <div id="Progress2" ref="Progress2"><span>aaa</span></div> */}
         <table>
           <tbody>
-            {appleList ?
-              Object.keys(appleList).map(key => this.generateRow(appleList[key], key)) : null}
+            {appleObj
+              ? Object.keys(appleObj).map(key =>
+                  this.generateRow(appleObj[key], key)
+                )
+              : null}
           </tbody>
         </table>
         {/* <div>
@@ -146,10 +158,15 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ appleCodeList: state.appleCode });
+// const mapStateToProps = state => ({ appleCodeList: state.appleCode });
 
 // const ConnectedApp = connect(mapStateToProps, {appleApiCall})(App);
 
-export default connect(mapStateToProps, { appleApiCall })(App);
+// export default connect(
+//   null,
+//   null
+// )(App);
+
+export default App;
 
 // export default AppContainer;

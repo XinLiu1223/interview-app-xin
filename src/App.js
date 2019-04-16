@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
-import App from './view/appleCode';
-import './App.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { appleApiCall } from "./state-management/appleCode/actions";
+import App from "./view/appleCode";
+import "./App.css";
 
 class AppContainer extends Component {
   render() {
+    const { appleApiCall, listObj } = this.props;
+    const passProps = { appleApiCall, listObj };
+
     return (
       <div className="App">
         <header>
@@ -34,10 +39,22 @@ class AppContainer extends Component {
           {appleInterview && appleInterview.mylist && appleInterview.mylist[0] ?
             appleInterview && appleInterview.mylist && appleInterview.mylist[0].img : null}
         </div> */}
-        <App />
+        <App {...passProps} />
       </div>
     );
   }
 }
 
-export default AppContainer;
+// export default AppContainer;
+
+// const mapStateToProps = state => ({ listObj: state.appleCode });
+const mapStateToProps = state => ({ listObj: state.appleCode.appleListObj });
+
+// const ConnectedApp = connect(mapStateToProps, {appleApiCall})(App);
+
+const mapDispatchToProps = { appleApiCall };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AppContainer);
