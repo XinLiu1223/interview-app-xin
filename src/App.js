@@ -54,6 +54,18 @@ const mapStateToProps = state => ({ listObj: state.appleCode.appleListObj });
 
 const mapDispatchToProps = { appleApiCall };
 
+/*
+  // this is not related to curry or closure
+  // it's the callback function, mapDispatcheToProps is the implementation of
+  // callback fucnton, dispatch is the pass in callback function reference
+  // inside the mapDispatchToProps, execute the callback
+  function mapDispatchToProps(dispatch) {
+    return {
+      createCourse: course => dispatch(courseActions.createCourse(course))
+    };
+  }
+*/
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
