@@ -1,18 +1,18 @@
-import { API_CALL } from './actions';
+import { API_CALL } from "./actions";
 
 const initialState = {
-  appleList: {}
+  appleListObj: {}
 };
 
-export default function(state = initialState, action) {
-  switch(action.type) {
+export const appleCode = (state = initialState, action) => {
+  switch (action.type) {
     case API_CALL:
-    console.log(action.payload);
+      console.log(action.payload);
       return {
         ...state,
-        appleList: action.payload
-      }
-    default: 
+        appleListObj: action.payload
+      };
+    default:
       return state;
   }
 };

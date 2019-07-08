@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux';
-import appleCodeReducer from './appleCode/reducers';
+import { combineReducers } from "redux";
+import { appleCode } from "./appleCode/reducers";
 
 export default combineReducers({
-    appleCode: appleCodeReducer
+  appleCode
 });
